@@ -16,6 +16,11 @@ Vagrant.configure("2") do |config|
   cd opencapwap_hostapd_wrapper/AC/hostapd
   make clean
   make
+  make install
+  sudo modprobe mac80211_hwsim radios=2
+  sudo rfkill unblock all
+  sudo ifconfig wlan0 up
+  sudo ifconfig wlan1 up
 SCRIPT
 
   $wtpscript = <<SCRIPT
@@ -36,6 +41,11 @@ SCRIPT
   cd opencapwap_hostapd_wrapper/WTP/hostapd
   make clean
   make
+  make install
+  sudo modprobe mac80211_hwsim radios=2
+  sudo rfkill unblock all
+  sudo ifconfig wlan0 up
+  sudo ifconfig wlan1 up
 SCRIPT
 
 
@@ -50,7 +60,7 @@ SCRIPT
     wtpconfig.vm.box = "ubuntu/trusty32"
   end
 
-  config.vm.define "client" do |db|
-    client.vm.box = "ubuntu/trusty32"
+  config.vm.define "client" do |clientconfig|
+    clientconfig.vm.box = "ubuntu/trusty32"
   end
 end
