@@ -1,13 +1,6 @@
 Vagrant.configure("2") do |config|
   $acscript = <<SCRIPT
   echo I am provisioning AC...
-  sudo apt-get update
-  yes| sudo apt-get upgrade
-  yes| sudo apt-get install git
-  yes| sudo apt-get install libnl-dev
-  yes| sudo apt-get install libpcap-dev
-  yes| sudo apt-get install libssl-dev
-  yes| sudo apt-get install rfkill
   git clone https://github.com/ahmedshabib/openCAPWAP
   cd openCAPWAP
   make clean
@@ -26,14 +19,6 @@ SCRIPT
 
   $wtpscript = <<SCRIPT
   echo I am provisioning WTP...
-  git clone https://github.com/ahmedshabib/openCAPWAP
-  sudo apt-get update
-  yes| sudo apt-get upgrade
-  yes| sudo apt-get install git
-  yes| sudo apt-get install libnl-dev
-  yes| sudo apt-get install libpcap-dev
-  yes| sudo apt-get install libssl-dev
-  yes| sudo apt-get install rfkill
   git clone https://github.com/ahmedshabib/openCAPWAP
   cd openCAPWAP
   make clean
@@ -54,15 +39,15 @@ SCRIPT
   config.vm.define "ac" do |acconfig|
 
     acconfig.vm.provision "shell", inline: $acscript
-    acconfig.vm.box = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
+    acconfig.vm.box = "ahmedshabib/trusty32"
   end
 
   config.vm.define "wtp" do |wtpconfig| 
     wtpconfig.vm.provision "shell", inline: $wtpscript
-    wtpconfig.vm.box = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
+    wtpconfig.vm.box = "ahmedshabib/trusty32"
   end
 
   config.vm.define "client" do |clientconfig|
-    clientconfig.vm.box = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
+    clientconfig.vm.box = "ahmedshabib/trusty32"
   end
 end
