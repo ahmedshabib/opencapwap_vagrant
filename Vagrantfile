@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
   yes| sudo apt-get install libnl-dev
   yes| sudo apt-get install libpcap-dev
   yes| sudo apt-get install libssl-dev
+  yes| sudo apt-get install rfkill
   git clone https://github.com/ahmedshabib/openCAPWAP
   cd openCAPWAP
   make clean
@@ -32,6 +33,7 @@ SCRIPT
   yes| sudo apt-get install libnl-dev
   yes| sudo apt-get install libpcap-dev
   yes| sudo apt-get install libssl-dev
+  yes| sudo apt-get install rfkill
   git clone https://github.com/ahmedshabib/openCAPWAP
   cd openCAPWAP
   make clean
@@ -52,15 +54,15 @@ SCRIPT
   config.vm.define "ac" do |acconfig|
 
     acconfig.vm.provision "shell", inline: $acscript
-    acconfig.vm.box = "ubuntu/trusty32"
+    acconfig.vm.box = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
   end
 
   config.vm.define "wtp" do |wtpconfig| 
     wtpconfig.vm.provision "shell", inline: $wtpscript
-    wtpconfig.vm.box = "ubuntu/trusty32"
+    wtpconfig.vm.box = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
   end
 
   config.vm.define "client" do |clientconfig|
-    clientconfig.vm.box = "ubuntu/trusty32"
+    clientconfig.vm.box = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
   end
 end
